@@ -12,3 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
+.idea/
+Node Js-Android Authentication mySQL/node_modules

@@ -35,7 +35,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String BASE_URL = "http://192.168.0.104:3000";
+    public static final String BASE_URL = "http://192.168.0.104:3000/";
     private login l;
     private Register r;
     Toolbar toolbar;

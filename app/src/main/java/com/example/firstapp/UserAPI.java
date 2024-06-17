@@ -12,14 +12,15 @@ import retrofit2.http.Query;
 
 public interface UserAPI {
    @Headers("Content-Type: application/json")
-   @POST("/login")
+   @POST("/api/login")
     Call<Void> login(@Body User user);
 
     @Headers("Content-Type: application/json")
-    @POST("/signup")
-    Call<Void>  signUp(@Body User user);
+    @POST("/api/signup")
+    Call<Void> signUp(@Body User user);
 
     @Headers("Content-Type: application/json")
-   @GET("/user")
+   @GET("/api/user")
     Call<User> getUser(@Body User user);
+
 }
