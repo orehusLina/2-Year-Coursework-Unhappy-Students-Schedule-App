@@ -59,39 +59,40 @@ public class MainActivity extends AppCompatActivity {
         ViewPagr viewPagr =  new ViewPagr(getSupportFragmentManager(),0);
         viewPagr.addFragment(l,"Login");
         viewPagr.addFragment(r,"Register");
+
         viewPager.setAdapter(viewPagr);
 
     }
 }
     class ViewPagr extends FragmentPagerAdapter{
 
-    private List<Fragment> fragments = new ArrayList<>();
-    private List<String> fragmentTitle = new ArrayList<>();
+        private List<Fragment> fragments = new ArrayList<>();
+        private List<String> fragmentTitle = new ArrayList<>();
 
-    public ViewPagr(@NonNull FragmentManager fm, int behavior) {
-        super(fm, behavior);
-    }
-
-    public void addFragment(Fragment fragment, String title) {
-        fragments.add(fragment);
-        fragmentTitle.add(title);
-    }
-    @NonNull
-    @Override
-    public Fragment getItem(int position) {
-        return fragments.get(position);
-    }
-    @Override
-    public int getCount() {
-        return fragments.size();
-    }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return fragmentTitle.get(position);
-
+        public ViewPagr(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
         }
+
+        public void addFragment(Fragment fragment, String title) {
+            fragments.add(fragment);
+            fragmentTitle.add(title);
+        }
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+            @Nullable
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return fragmentTitle.get(position);
+
+            }
     }
 
 

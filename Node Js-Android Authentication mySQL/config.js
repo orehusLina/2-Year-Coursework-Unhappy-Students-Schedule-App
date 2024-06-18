@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 let connection = db.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '111111',
+    password: '229335',
     database: 'test'
 });
 

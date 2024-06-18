@@ -1,6 +1,5 @@
 package com.example.firstapp.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.firstapp.MainActivity;
 import com.example.firstapp.R;
-import com.example.firstapp.User;
+import com.example.firstapp.model.User;
 import com.example.firstapp.UserAPI;
 
 import org.jetbrains.annotations.NotNull;
