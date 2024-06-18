@@ -18,5 +18,5 @@
         android:layout_height="wrap_content"
         android:textSize="14sp" />
 
-    <!-- Add more TextViews for other fields as needed -->
+
 </LinearLayout>
