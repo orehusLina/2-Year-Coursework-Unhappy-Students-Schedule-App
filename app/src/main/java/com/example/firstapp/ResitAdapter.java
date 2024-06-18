@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,24 +12,23 @@ import com.example.firstapp.model.Resit;
 
 import java.util.List;
 
-public class ResitsAdapter extends RecyclerView.Adapter<ResitsAdapter.ResitViewHolder> {
+public class ResitAdapter extends RecyclerView.Adapter<ResitAdapter.ResitViewHolder> {
 
     private List<Resit> resitsList;
 
-    public ResitsAdapter(List<Resit> resitsList) {
+    public ResitAdapter(List<Resit> resitsList) {
         this.resitsList = resitsList;
     }
 
     public static class ResitViewHolder extends RecyclerView.ViewHolder {
         public TextView courseTextView;
         public TextView facultyTextView;
-        // добавьте остальные TextView для всех полей
 
         public ResitViewHolder(View view) {
             super(view);
             courseTextView = view.findViewById(R.id.courseTextView);
             facultyTextView = view.findViewById(R.id.facultyTextView);
-            // инициализируйте остальные TextView
+
         }
     }
 
@@ -44,7 +44,7 @@ public class ResitsAdapter extends RecyclerView.Adapter<ResitsAdapter.ResitViewH
         Resit resit = resitsList.get(position);
         holder.courseTextView.setText(resit.getCourse());
         holder.facultyTextView.setText(resit.getFaculty());
-        // привязать остальные поля
+
     }
 
     @Override
@@ -52,4 +52,3 @@ public class ResitsAdapter extends RecyclerView.Adapter<ResitsAdapter.ResitViewH
         return resitsList.size();
     }
 }
-

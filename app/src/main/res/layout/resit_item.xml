@@ -3,19 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/courseTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Course"/>
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/facultyTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Faculty"/>
+        android:textSize="14sp" />
 
-    <!-- Добавить остальные TextView для всех полей -->
+    <!-- Add more TextViews for other fields as needed -->
 </LinearLayout>

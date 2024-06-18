@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstapp.CSVLoader;
 import com.example.firstapp.R;
-import com.example.firstapp.ResitsAdapter;
+import com.example.firstapp.ResitAdapter;
 import com.example.firstapp.model.Resit;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ResitsFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private ResitsAdapter adapter;
+    private ResitAdapter adapter;
     private CSVLoader csvLoader;
 
     @Nullable
@@ -35,7 +35,7 @@ public class ResitsFragment extends Fragment {
         csvLoader = new CSVLoader();
         List<Resit> resitsList = csvLoader.loadCSVData("./resits.csv");
 
-        adapter = new ResitsAdapter(resitsList);
+        adapter = new ResitAdapter(resitsList);
         recyclerView.setAdapter(adapter);
 
         return rootView;

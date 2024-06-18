@@ -24,7 +24,7 @@ public interface UserAPI {
     @GET("/api/user")
     Call<User> getUser(@Body User user);
 
-    @GET("resits")
+    @GET("/api/resits")
     Call<List<Resit>> getResits();
 
 }
