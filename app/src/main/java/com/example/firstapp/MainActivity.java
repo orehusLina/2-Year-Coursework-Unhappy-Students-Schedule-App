@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.vpager);
         tab.setupWithViewPager(viewPager);
         ViewPagr viewPagr =  new ViewPagr(getSupportFragmentManager(),0);
-        viewPagr.addFragment(l,"Login");
-        viewPagr.addFragment(r,"Register");
+        viewPagr.addFragment(l,"Войти");
+        viewPagr.addFragment(r,"Зарегистрироваться");
 
         viewPager.setAdapter(viewPagr);
 

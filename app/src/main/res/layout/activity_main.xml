@@ -20,7 +20,7 @@
             android:id="@+id/tool"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="Nodejs :login-register">
+            app:title="СГУ им. Н. Г. Чернышевского">
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout

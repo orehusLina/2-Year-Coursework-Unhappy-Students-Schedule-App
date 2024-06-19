@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -28,8 +29,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class login extends Fragment {
-    private EditText uname, password;
-    private Button log;
+    private EditText email, password;
+    private Button submitButton;
+    private TextView signUpLink;
 
     public login() {
     }
@@ -38,21 +40,34 @@ public class login extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        uname = view.findViewById(R.id.uname_login);
-        password = view.findViewById(R.id.pass_login);
-        log = view.findViewById(R.id.login_btn);
+        email = view.findViewById(R.id.email);
+        password = view.findViewById(R.id.password);
+        submitButton = view.findViewById(R.id.submit_button);
+        signUpLink = view.findViewById(R.id.sign_up_link);
 
-        log.setOnClickListener(new View.OnClickListener() {
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final User user = new User();
-                user.setUsername(uname.getText().toString());
-                user.setPassword(password.getText().toString());
-                SendPostReq(user);
+                loginUser();
+            }
+        });
+
+        signUpLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle sign up link click
+                Toast.makeText(getContext(), "Sign up link clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
+    }
+
+    private void loginUser() {
+        final User user = new User();
+        user.setUsername(email.getText().toString());
+        user.setPassword(password.getText().toString());
+        SendPostReq(user);
     }
 
     private void SendPostReq(final User user) {
