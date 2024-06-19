@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.firstapp.MainActivity;
@@ -27,71 +30,99 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
 public class Register extends Fragment {
     public static String TAG = "TAG";
 
-    EditText uname,password;
-    Button sign;
-     User user;
+    EditText firstName, lastName, username, password;
+    RadioGroup roleRadioGroup;
+    Button registerButton;
+    TextView logInLink;
+    User user;
 
     public Register() {
         // Required empty public constructor
-    }
-
-
-
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view = inflater.inflate(R.layout.fragment_register, container, false);
+        View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        uname =view.findViewById(R.id.usn);
-        password = view.findViewById(R.id.pass);
-        sign = view.findViewById(R.id.regbtn);
+        firstName = view.findViewById(R.id.first_name_register);
+        lastName = view.findViewById(R.id.last_name_register);
+        username = view.findViewById(R.id.username_register);
+        password = view.findViewById(R.id.password_register);
+        roleRadioGroup = view.findViewById(R.id.role_radio_group);
+        registerButton = view.findViewById(R.id.register_button);
+        logInLink = view.findViewById(R.id.log_in_link);
 
-        sign.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user = new User();
-                user.setPassword(password.getText().toString());
-                user.setUsername(uname.getText().toString());
-
-                Log.d(TAG, "onClick: password"+ uname +" username" + password);
-                SendPostReq(user);
+                registerUser();
             }
         });
-        return  view;
+
+        logInLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle log in link click
+                Toast.makeText(getContext(), "Log in link clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
     }
 
-    private void SendPostReq(final User m) {
+    private void registerUser() {
+        /*
+        user = new User();
+        user.setFirstName(firstName.getText().toString());
+        user.setLastName(lastName.getText().toString());
+        user.setUsername(username.getText().toString());
+        user.setPassword(password.getText().toString());
+
+        int selectedRoleId = roleRadioGroup.getCheckedRadioButtonId();
+        switch (selectedRoleId) {
+            case R.id.role_student:
+                user.setRole("Student");
+                break;
+            case R.id.role_teacher:
+                user.setRole("Teacher");
+                break;
+            case R.id.role_admin:
+                user.setRole("Admin");
+                break;
+            default:
+                // Handle default case
+                break;
+        }
+
+
+         */
+        Log.d(TAG, "onClick: FirstName " + firstName + " Username " + username);
+        SendPostReq(user);
+    }
+
+    private void SendPostReq(final User user) {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
-        Retrofit retrofit  = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(MainActivity.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
         UserAPI userAPI = retrofit.create(UserAPI.class);
-        Call<Void> call = userAPI.signUp(m);
+        Call<Void> call = userAPI.signUp(user);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NotNull Call<Void> call, @NotNull Response<Void> response) {
-                if(response.code()==200){
-                    Toast.makeText(getContext(),"You have signed up successully & saved your data!!!!", Toast.LENGTH_SHORT).show();
-
-                }else {
+                if (response.code() == 200) {
+                    Toast.makeText(getContext(), "You have signed up successfully & saved your data!!!!", Toast.LENGTH_SHORT).show();
+                } else {
                     Toast.makeText(getContext(), "Failed to sign up!!!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -103,4 +134,3 @@ public class Register extends Fragment {
         });
     }
 }
-

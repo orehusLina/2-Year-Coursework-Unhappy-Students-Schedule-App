@@ -1,44 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Register">
+    android:padding="16dp">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Register"
-    android:textSize="24sp"
-    android:id="@+id/reg"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="28dp"/>
-
-    <EditText
-        android:layout_width="309dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/reg"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="72dp"
-        android:hint="Username"
-        android:id="@+id/usn"/>
-    <EditText
-        android:id="@+id/pass"
-        android:layout_width="309dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/usn"
-        android:layout_marginTop="42dp"
-        android:layout_centerHorizontal="true">
-    </EditText>
-    <Button
+    <TextView
+        android:id="@+id/welcome_title_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/regbtn"
-        android:layout_below="@id/pass"
+        android:text="Зарегистрироваться"
+        android:textSize="24sp"
+        android:textColor="#1e0e4b"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"/>
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/app_name_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="на пересдачи"
+        android:textSize="24sp"
+        android:textColor="#7747ff"
+        android:textStyle="bold"
+        android:layout_below="@id/welcome_title_register"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/sign_up_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Пока бесплатно"
+        android:textSize="14sp"
+        android:textColor="#1e0e4b"
+        android:layout_below="@id/app_name_register"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/first_name_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sign_up_text"
+        android:layout_marginTop="16dp"
+        android:hint="Имя"
+        android:inputType="text"
+        android:textSize="20sp"
+    android:textColor="#1e0e4b"
+    />
+
+    <EditText
+        android:id="@+id/last_name_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/first_name_register"
+        android:layout_marginTop="16dp"
+        android:hint="Фамилия"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:textColor="#1e0e4b"
+        />
+
+    <EditText
+        android:id="@+id/username_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/last_name_register"
+        android:layout_marginTop="16dp"
+        android:hint="Логин"
+        android:inputType="text"
+        android:textSize="20sp"
+    android:textColor="#1e0e4b"
+    />
+
+    <EditText
+        android:id="@+id/password_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username_register"
+        android:layout_marginTop="16dp"
+        android:hint="Пароль"
+        android:inputType="textPassword"
+        android:textSize="20sp"
+    android:textColor="#1e0e4b"
+    />
+
+    <RadioGroup
+        android:id="@+id/role_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password_register"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/role_student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Студент"
+            android:textSize="18sp"
+        android:textColor="#1e0e4b"/>
+
+        <RadioButton
+            android:id="@+id/role_teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Преподаватель"
+            android:textSize="18sp"
+        android:textColor="#1e0e4b"/>
+
+        <RadioButton
+            android:id="@+id/role_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Администратор"
+            android:textSize="18sp"
+        android:textColor="#1e0e4b"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/register_button"
+        android:background="@drawable/rounded_button_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/role_radio_group"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+
+        android:gravity="center"
+        android:paddingStart="24dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="8dp"
+        android:text="Зарегистрироваться"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/log_in_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Уже есть аккаунт? "
+        android:textSize="12sp"
+        android:textColor="#1e0e4b"
+        android:layout_below="@id/register_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:id="@+id/log_in_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Войти"
+        android:textSize="12sp"
+        android:textColor="#7747ff"
+        android:layout_below="@id/register_button"
+        android:layout_toEndOf="@id/log_in_prompt"
+        android:layout_marginTop="24dp"/>
 
 </RelativeLayout>

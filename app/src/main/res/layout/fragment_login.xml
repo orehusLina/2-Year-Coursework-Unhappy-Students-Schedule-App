@@ -50,7 +50,7 @@
         android:layout_marginTop="16dp"
         android:hint="Логин"
         android:inputType="textEmailAddress"
-        android:textSize="14sp"
+        android:textSize="24sp"
         android:textColor="#1e0e4b"
         />
 
@@ -62,7 +62,7 @@
         android:layout_marginTop="16dp"
         android:hint="Пароль"
         android:inputType="textPassword"
-        android:textSize="14sp"
+        android:textSize="24sp"
         android:textColor="#1e0e4b"
         />
 
