@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstapp.model.Resit;
+import com.example.firstapp.model.ResitRequest;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ResitAdapter extends RecyclerView.Adapter<ResitAdapter.ResitViewHol
         holder.textViewSubject.setText(resit.getSubject());
         holder.textViewDate.setText(resit.getDate());
         holder.textViewTime.setText(resit.getTime());
-        holder.textViewTeacher.setText(resit.getTeacher());
+        holder.textViewTeacher.setText(resit.getTeacherListToString());
         holder.textViewPlace.setText(resit.getPlace());
         // Bind other fields here if needed
     }

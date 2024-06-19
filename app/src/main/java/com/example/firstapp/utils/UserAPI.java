@@ -1,6 +1,6 @@
-package com.example.firstapp;
+package com.example.firstapp.utils;
 
-import com.example.firstapp.model.Resit;
+import com.example.firstapp.model.ResitRequest;
 import com.example.firstapp.model.User;
 
 import java.util.List;
@@ -25,6 +25,6 @@ public interface UserAPI {
     Call<User> getUser(@Body User user);
 
     @GET("/api/resits")
-    Call<List<Resit>> getResits();
+    Call<List<ResitRequest>> getResits();
 
 }

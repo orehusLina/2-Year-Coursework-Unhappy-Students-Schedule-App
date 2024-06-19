@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +17,7 @@ import android.widget.Toast;
 import com.example.firstapp.MainActivity;
 import com.example.firstapp.R;
 import com.example.firstapp.model.User;
-import com.example.firstapp.UserAPI;
+import com.example.firstapp.utils.UserAPI;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -30,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Register extends Fragment {
+public class RegisterFragment extends Fragment {
     public static String TAG = "TAG";
 
     EditText firstName, lastName, username, password;
@@ -39,7 +38,7 @@ public class Register extends Fragment {
     TextView logInLink;
     User user;
 
-    public Register() {
+    public RegisterFragment() {
         // Required empty public constructor
     }
 

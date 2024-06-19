@@ -1,7 +1,5 @@
 package com.example.firstapp.utils;
 
-import com.example.firstapp.UserAPI;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

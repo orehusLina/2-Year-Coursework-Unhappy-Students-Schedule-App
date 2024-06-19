@@ -16,7 +16,7 @@ import com.example.firstapp.FrontPageActivity;
 import com.example.firstapp.MainActivity;
 import com.example.firstapp.R;
 import com.example.firstapp.model.User;
-import com.example.firstapp.UserAPI;
+import com.example.firstapp.utils.UserAPI;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,12 +28,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class login extends Fragment {
+public class LoginFragment extends Fragment {
     private EditText email, password;
     private Button submitButton;
     private TextView signUpLink;
 
-    public login() {
+    public LoginFragment() {
     }
 
     @Override
