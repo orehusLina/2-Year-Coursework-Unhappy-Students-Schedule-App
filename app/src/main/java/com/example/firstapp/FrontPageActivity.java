@@ -1,13 +1,17 @@
 package com.example.firstapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
 import com.example.firstapp.fragments.AllResitsFragment;
 import com.example.firstapp.fragments.MyResitsFragment;
 import com.example.firstapp.fragments.ProfileFragment;
+import com.example.firstapp.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FrontPageActivity extends AppCompatActivity {
@@ -20,9 +24,29 @@ public class FrontPageActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        // Set the default fragment
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AllResitsFragment()).commit();
+        // Получение данных о пользователе из Intent, если они есть
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("loggedInUser")) {
+            User loggedInUser = (User) intent.getSerializableExtra("loggedInUser");
+            if (loggedInUser != null) {
+                // Передача loggedInUser в MyResitsFragment
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("loggedInUser", loggedInUser);
+
+                MyResitsFragment fragment = new MyResitsFragment();
+                fragment.setArguments(bundle);
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
+                bottomNav.setSelectedItemId(R.id.nav_my_resits);
+            }
+        } else {
+            // Если данных о пользователе нет в Intent, загрузить фрагмент по умолчанию
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new AllResitsFragment())
+                    .commit();
+            bottomNav.setSelectedItemId(R.id.nav_all_resits); // Установка выбранного пункта в Bottom Navigation
         }
     }
 
@@ -44,7 +68,9 @@ public class FrontPageActivity extends AppCompatActivity {
                             break;
                     }
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, selectedFragment)
+                            .commit();
                     return true;
                 }
             };

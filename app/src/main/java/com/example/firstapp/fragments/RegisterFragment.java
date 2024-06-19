@@ -75,7 +75,6 @@ public class RegisterFragment extends Fragment {
     }
 
     private void registerUser() {
-        /*
         user = new User();
         user.setFirstName(firstName.getText().toString());
         user.setLastName(lastName.getText().toString());
@@ -97,9 +96,6 @@ public class RegisterFragment extends Fragment {
                 // Handle default case
                 break;
         }
-
-
-         */
         Log.d(TAG, "onClick: FirstName " + firstName + " Username " + username);
         SendPostReq(user);
     }

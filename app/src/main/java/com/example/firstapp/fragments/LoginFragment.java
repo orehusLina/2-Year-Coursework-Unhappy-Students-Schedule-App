@@ -81,12 +81,14 @@ public class LoginFragment extends Fragment {
                 .client(okHttpClient)
                 .build();
         UserAPI userAPI = retrofit.create(UserAPI.class);
-        Call<Void> call = userAPI.login(user);
-        call.enqueue(new Callback<Void>() {
+        Call<User> call = userAPI.login(user);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(@NotNull Call<Void> call, @NotNull Response<Void> response) {
+            public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
                 if (response.code() == 200) {
+                    User loggedInUser = response.body();
                     Intent intent = new Intent(getActivity(), FrontPageActivity.class);
+                    intent.putExtra("loggedInUser", loggedInUser);
                     startActivity(intent);
                     getActivity().finish(); // закрываем текущую активность
                     Toast.makeText(getContext(), "You have logged in successfully!!", Toast.LENGTH_SHORT).show();
@@ -96,7 +98,7 @@ public class LoginFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed to get Response!!!", Toast.LENGTH_SHORT).show();
             }
         });

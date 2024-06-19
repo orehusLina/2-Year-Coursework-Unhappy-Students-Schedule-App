@@ -16,7 +16,7 @@ let connection = db.createConnection({
     host: 'localhost',
     user: 'root',
     password: '229335',
-    database: 'test'
+    database: 'test2'
 });
 
 connection.connect((err) => {
@@ -44,10 +44,11 @@ function loadCSVData() {
 loadCSVData();
 
 app.post('/signup', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const { username, password, firstName, lastName, role } = req.body;
 
-    connection.query('INSERT INTO table1 (username, password) VALUES (?, ?)', [username, password], (err, result) => {
+    connection.query('INSERT INTO users (username, password, name, surname, role) VALUES (?, ?, ?, ?, ?)', 
+    [username, password, firstName, lastName, role], 
+    (err, result) => {
         if (!err && result.affectedRows != 0) {
             res.status(200).send('inserted successfully');
         } else {
@@ -58,10 +59,18 @@ app.post('/signup', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    const sql = 'SELECT * FROM table1 WHERE username = ?';
+    const sql = 'SELECT * FROM users WHERE username = ?';
     connection.query(sql, [req.body.username], (err, result) => {
         if (!err && result.length > 0 && result[0].password === req.body.password) {
-            res.status(200).send();
+            const user = {
+                id: result[0].id,
+                username: result[0].username,
+                password: result[0].password,
+                firstName: result[0].name,
+                lastName: result[0].surname,
+                role: result[0].role
+            };
+            res.status(200).json(user);
         } else {
             res.status(401).send('wrong credentials');
             console.error(err);
@@ -69,8 +78,28 @@ app.post('/login', (req, res) => {
     });
 });
 
+// Новый маршрут для получения данных о пользователе
+app.get('/api/user', (req, res) => {
+    const username = req.query.username;
+    const sql = 'SELECT * FROM users WHERE username = ?';
+    connection.query(sql, [username], (err, result) => {
+        if (!err && result.length > 0) {
+            const user = result[0];
+            res.status(200).json({
+                username: user.username,
+                firstName: user.name,
+                lastName: user.surname,
+                role: user.role
+            });
+        } else {
+            res.status(404).send('User not found');
+            console.error(err);
+        }
+    });
+});
+
 app.delete('/delete', (req, res) => {
-    const sql = 'DELETE FROM table1 WHERE username = ?';
+    const sql = 'DELETE FROM users WHERE username = ?';
     connection.query(sql, [req.body.username], (err, result) => {
         if (!err && result.affectedRows != 0) {
             res.status(200).send('Пользователь успешно удален');
