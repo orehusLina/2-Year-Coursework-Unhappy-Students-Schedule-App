@@ -248,74 +248,100 @@ public class Resit {
         }
     }
 
-    // Метод для проверки уникальности пересдачи
-    public static boolean isSameResit(Resit resit, ResitRequest resitRequest) {
-        return resit.getDate().equals(resitRequest.getDate()) &&
-                resit.getTime().equals(resitRequest.getTime()) &&
-                resit.getPlace().equals(resitRequest.getPlace()) &&
-                resit.getExamType().equals(resitRequest.getExamType()); // Добавьте другие условия по необходимости
-    }
-
     // Метод для преобразования списка ResitRequest в список Resit
     public static List<Resit> convertToResits(List<ResitRequest> resitRequests) {
         List<Resit> resits = new ArrayList<>();
-        List<Student> existingStudents = new ArrayList<>();
-        List<Teacher> existingTeachers = new ArrayList<>();
 
-        // Проходим по всем ResitRequest для формирования уникальных пересдач
         for (ResitRequest resitRequest : resitRequests) {
-            Student student = new Student(resitRequest);
-            Teacher teacher = new Teacher(resitRequest);
-
-            // Проверяем, существует ли уже такая пересдача в списке resits
             boolean found = false;
+
             for (Resit existingResit : resits) {
-
-                // Добавляем пересдачу студенту и преподавателю
-                student.addUniqueResit(existingResit);
-                teacher.addUniqueResit(existingResit);
-
-                // Здесь определяем условия уникальности пересдачи
                 if (isSameResit(existingResit, resitRequest)) {
-                    // Найдена уже существующая пересдача, добавляем уникальных студентов и преподавателей
-                    existingResit.addUniqueStudent(student);
-                    existingResit.addUniqueTeacher(teacher);
+                    addUniqueEntities(existingResit, resitRequest);
                     found = true;
                     break;
                 }
             }
 
-            // Если не найдена существующая пересдача, создаем новую
             if (!found) {
                 Resit resit = new Resit(
                         resitRequest.getSubject(),
-                        new ArrayList<>(), // Список студентов будет заполняться позже
-                        new ArrayList<>(),   // Список преподавателей будет заполняться позже
+                        new ArrayList<>(),
+                        new ArrayList<>(),
                         resitRequest.getCourse(),
                         resitRequest.getFaculty(),
                         resitRequest.getDegree(),
                         resitRequest.getFormOfStudy(),
                         resitRequest.getExamType(),
                         resitRequest.getCommissionRetake(),
-                        new ArrayList<>(), // Список групп
-                        new ArrayList<>(), // Список специальностей
+                        new ArrayList<>(),
+                        new ArrayList<>(),
                         resitRequest.getDate(),
                         resitRequest.getTime(),
                         resitRequest.getPlace()
                 );
 
-                // Добавляем уникальных студентов и преподавателей к новой пересдаче
-                resit.addUniqueStudent(student);
-                resit.addUniqueTeacher(teacher);
-                resit.addUniqueGroup(resitRequest.getGroup());
-                resit.addUniqueSpecialty(resitRequest.getSpecialty());
-
-                // Добавляем новую пересдачу в список
+                addUniqueEntities(resit, resitRequest);
                 resits.add(resit);
             }
         }
+
         return resits;
     }
 
+    private static void addUniqueEntities(Resit resit, ResitRequest resitRequest) {
+        Student student = new Student(resitRequest);
+        Teacher teacher = new Teacher(resitRequest);
 
+        resit.addUniqueStudent(student);
+        resit.addUniqueTeacher(teacher);
+        resit.addUniqueGroup(resitRequest.getGroup());
+        resit.addUniqueSpecialty(resitRequest.getSpecialty());
+
+        student.addUniqueResit(resit);
+        teacher.addUniqueResit(resit);
+    }
+
+    public static boolean isSameResit(Resit resit, ResitRequest resitRequest) {
+        return resit.getDate().equals(resitRequest.getDate()) &&
+                resit.getTime().equals(resitRequest.getTime()) &&
+                resit.getPlace().equals(resitRequest.getPlace()) &&
+                resit.getExamType().equals(resitRequest.getExamType());
+    }
+
+    public static List<Student> convertStudentsFromRequests(List<ResitRequest> resitRequests) {
+        List<Student> students = new ArrayList<>();
+
+        for (ResitRequest resitRequest : resitRequests) {
+            Student student = new Student(resitRequest);
+
+            if (!students.contains(student)) {
+                students.add(student);
+            }
+
+            for (Resit resit : convertToResits(resitRequests)) {
+                student.addUniqueResit(resit);
+            }
+        }
+
+        return students;
+    }
+
+    public static List<Teacher> convertTeachersFromRequests(List<ResitRequest> resitRequests) {
+        List<Teacher> teachers = new ArrayList<>();
+
+        for (ResitRequest resitRequest : resitRequests) {
+            Teacher teacher = new Teacher(resitRequest);
+
+            if (!teachers.contains(teacher)) {
+                teachers.add(teacher);
+            }
+
+            for (Resit resit : convertToResits(resitRequests)) {
+                teacher.addUniqueResit(resit);
+            }
+        }
+
+        return teachers;
+    }
 }

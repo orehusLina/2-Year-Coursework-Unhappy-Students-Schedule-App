@@ -2,6 +2,7 @@ package com.example.firstapp.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Student {
     private String lastName;
@@ -159,6 +160,26 @@ public class Student {
             resits.add(resit);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(firstName, student.firstName) &&
+                Objects.equals(lastName, student.lastName) &&
+                Objects.equals(middleName, student.middleName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, middleName);
+    }
+
+    public boolean matchesUser(User user) {
+        return this.firstName.equals(user.getFirstName()) && this.lastName.equals(user.getLastName());
+    }
+
 
     @Override
     public String toString() {

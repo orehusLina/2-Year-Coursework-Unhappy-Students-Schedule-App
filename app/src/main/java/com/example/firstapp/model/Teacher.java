@@ -98,6 +98,10 @@ public class Teacher {
         }
     }
 
+    public boolean matchesUser(User user) {
+        return this.firstName.equals(user.getFirstName()) && this.lastName.equals(user.getLastName());
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +
