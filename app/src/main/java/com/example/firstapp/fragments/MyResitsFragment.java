@@ -1,16 +1,37 @@
 package com.example.firstapp.fragments;
 
 import android.os.Bundle;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.firstapp.R;
+import com.example.firstapp.ResitAdapter;
+import com.example.firstapp.UserViewModel;
+import com.example.firstapp.model.Resit;
+import com.example.firstapp.model.ResitRequest;
 import com.example.firstapp.model.User;
+import com.example.firstapp.utils.RetrofitClient;
+import com.example.firstapp.utils.UserAPI;
+
+import java.util.List;
 
 public class MyResitsFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private ResitAdapter resitAdapter;
+    private UserViewModel userViewModel;
 
     public MyResitsFragment() {
         // Required empty public constructor
@@ -22,25 +43,46 @@ public class MyResitsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_resits, container, false);
 
-        // Получение данных о пользователе из аргументов
-        Bundle args = getArguments();
-        if (args != null && args.containsKey("loggedInUser")) {
-            User loggedInUser = (User) args.getSerializable("loggedInUser");
-            if (loggedInUser != null) {
-                // Пример вывода данных о пользователе в TextView
-                TextView usernameTextView = view.findViewById(R.id.usernameTextView);
-                TextView fullNameTextView = view.findViewById(R.id.fullNameTextView);
-                TextView roleTextView = view.findViewById(R.id.roleTextView);
+        recyclerView = view.findViewById(R.id.myResitsRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-                usernameTextView.setText("Username: " + loggedInUser.getUsername());
-                fullNameTextView.setText("Full Name: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
-                roleTextView.setText("Role: " + loggedInUser.getRole());
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+
+        userViewModel.getLoggedInUser().observe(getViewLifecycleOwner(), new Observer<User>() {
+            public void onChanged(User user) {
+                if (user != null) {
+                    // Обновление UI с новыми данными о пользователе
+                    fetchUserResits(user);
+                }
             }
-        }
-
-        // Далее ваш код фрагмента
-
+        });
         return view;
     }
 
+    private void fetchUserResits(User user) {
+        UserAPI api = RetrofitClient.getAPI();
+        Call<List<ResitRequest>> call = api.getResits();
+        call.enqueue(new Callback<List<ResitRequest>>() {
+            @Override
+            public void onResponse(Call<List<ResitRequest>> call, Response<List<ResitRequest>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<ResitRequest> resitRequests = response.body();
+                    List<Resit> resits = Resit.convertToResits(resitRequests);
+                    displayResitsInTextView(resits);
+                } else {
+                    Log.d("ERROR", "ошибочка");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ResitRequest>> call, Throwable t) {
+                // Handle the error
+            }
+        });
+    }
+
+    private void displayResitsInTextView(List<Resit> resits) {
+        resitAdapter = new ResitAdapter(resits);
+        recyclerView.setAdapter(resitAdapter);
+    }
 }

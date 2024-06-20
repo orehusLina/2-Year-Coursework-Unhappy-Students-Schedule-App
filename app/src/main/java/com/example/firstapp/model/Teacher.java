@@ -104,7 +104,6 @@ public class Teacher {
                 "firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", resitList=" + resits +
                 '}';
     }
 }

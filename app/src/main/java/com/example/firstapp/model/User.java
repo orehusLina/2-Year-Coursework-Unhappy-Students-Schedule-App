@@ -2,7 +2,6 @@ package com.example.firstapp.model;
 
 import java.io.Serializable;
 public class User implements Serializable {
-    private int id;
     private String firstName;
     private String lastName;
     private String username;
@@ -14,8 +13,7 @@ public class User implements Serializable {
     }
 
     // Конструктор с параметрами
-    public User(int id, String username, String password, String firstName, String lastName, String role) {
-        this.id = id;
+    public User(String username, String password, String firstName, String lastName, String role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;

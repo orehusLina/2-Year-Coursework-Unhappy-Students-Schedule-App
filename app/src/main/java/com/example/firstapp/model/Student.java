@@ -173,7 +173,6 @@ public class Student {
                 ", group='" + group + '\'' +
                 ", specialty='" + specialty + '\'' +
                 ", program='" + program + '\'' +
-                ", resits=" + resits +
                 '}';
     }
 }

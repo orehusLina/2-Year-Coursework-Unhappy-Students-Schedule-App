@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModel;
 
 import com.example.firstapp.fragments.AllResitsFragment;
 import com.example.firstapp.fragments.MyResitsFragment;
@@ -15,11 +17,14 @@ import com.example.firstapp.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FrontPageActivity extends AppCompatActivity {
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front_page);
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -29,6 +34,7 @@ public class FrontPageActivity extends AppCompatActivity {
         if (intent != null && intent.hasExtra("loggedInUser")) {
             User loggedInUser = (User) intent.getSerializableExtra("loggedInUser");
             if (loggedInUser != null) {
+                userViewModel.setLoggedInUser(loggedInUser);
                 // Передача loggedInUser в MyResitsFragment
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("loggedInUser", loggedInUser);

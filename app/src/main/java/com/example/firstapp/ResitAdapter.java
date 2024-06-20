@@ -60,4 +60,10 @@ public class ResitAdapter extends RecyclerView.Adapter<ResitAdapter.ResitViewHol
             // Initialize other TextViews here if needed
         }
     }
+
+    public void updateData(List<Resit> newResits) {
+        resits.clear();
+        resits.addAll(newResits);
+        notifyDataSetChanged();
+    }
 }
