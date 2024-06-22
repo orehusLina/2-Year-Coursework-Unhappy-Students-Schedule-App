@@ -100,8 +100,8 @@ public class Resit {
         return commissionRetake;
     }
 
-    public List<String> getGroups() {
-        return groups;
+    public String getGroups() {
+        return String.join(", ", groups);
     }
 
     public List<String> getSpecialties() {

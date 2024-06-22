@@ -6,9 +6,9 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModel;
 
 import com.example.firstapp.fragments.AllResitsFragment;
 import com.example.firstapp.fragments.MyResitsFragment;
@@ -18,11 +18,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FrontPageActivity extends AppCompatActivity {
     private UserViewModel userViewModel;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front_page);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
@@ -46,6 +50,7 @@ public class FrontPageActivity extends AppCompatActivity {
                         .replace(R.id.fragment_container, fragment)
                         .commit();
                 bottomNav.setSelectedItemId(R.id.nav_my_resits);
+                toolbar.setTitle(R.string.my_resits_title);
             }
         } else {
             // Если данных о пользователе нет в Intent, загрузить фрагмент по умолчанию
@@ -53,6 +58,7 @@ public class FrontPageActivity extends AppCompatActivity {
                     .replace(R.id.fragment_container, new AllResitsFragment())
                     .commit();
             bottomNav.setSelectedItemId(R.id.nav_all_resits); // Установка выбранного пункта в Bottom Navigation
+            toolbar.setTitle(R.string.all_resits_title);
         }
     }
 
@@ -65,12 +71,15 @@ public class FrontPageActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.nav_all_resits:
                             selectedFragment = new AllResitsFragment();
+                            toolbar.setTitle(R.string.all_resits_title);
                             break;
                         case R.id.nav_my_resits:
                             selectedFragment = new MyResitsFragment();
+                            toolbar.setTitle(R.string.my_resits_title);
                             break;
                         case R.id.nav_profile:
                             selectedFragment = new ProfileFragment();
+                            toolbar.setTitle(R.string.profile_title);
                             break;
                     }
 

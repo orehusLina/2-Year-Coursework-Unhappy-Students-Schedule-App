@@ -116,4 +116,4 @@ app.get('/resits', (req, res) => {
     res.json(resits);
 });
 
-module.exports = app; // Export the configured app instance
+module.exports = app;

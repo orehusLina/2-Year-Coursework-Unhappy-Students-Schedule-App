@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstapp.model.Resit;
-import com.example.firstapp.model.ResitRequest;
 
 import java.util.List;
 
@@ -31,13 +30,12 @@ public class ResitAdapter extends RecyclerView.Adapter<ResitAdapter.ResitViewHol
     @Override
     public void onBindViewHolder(@NonNull ResitViewHolder holder, int position) {
         Resit resit = resits.get(position);
-        holder.textViewCourse.setText(resit.getCourse());
         holder.textViewSubject.setText(resit.getSubject());
+        holder.textViewTeacher.setText(resit.getTeacherListToString());
+        holder.textViewGroups.setText("Группы: " + resit.getGroups().toString());
         holder.textViewDate.setText(resit.getDate());
         holder.textViewTime.setText(resit.getTime());
-        holder.textViewTeacher.setText(resit.getTeacherListToString());
         holder.textViewPlace.setText(resit.getPlace());
-        // Bind other fields here if needed
     }
 
     @Override
@@ -47,17 +45,16 @@ public class ResitAdapter extends RecyclerView.Adapter<ResitAdapter.ResitViewHol
 
     public static class ResitViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewCourse, textViewSubject, textViewDate, textViewTime, textViewTeacher, textViewPlace;
+        TextView textViewSubject, textViewTeacher, textViewGroups, textViewDate, textViewTime, textViewPlace;
 
         public ResitViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewCourse = itemView.findViewById(R.id.textViewCourse);
             textViewSubject = itemView.findViewById(R.id.textViewSubject);
+            textViewTeacher = itemView.findViewById(R.id.textViewTeacher);
+            textViewGroups = itemView.findViewById(R.id.textViewGroups);
             textViewDate = itemView.findViewById(R.id.textViewDate);
             textViewTime = itemView.findViewById(R.id.textViewTime);
-            textViewTeacher = itemView.findViewById(R.id.textViewTeacher);
             textViewPlace = itemView.findViewById(R.id.textViewPlace);
-            // Initialize other TextViews here if needed
         }
     }
 

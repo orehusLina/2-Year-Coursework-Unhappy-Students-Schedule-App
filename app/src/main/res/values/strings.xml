@@ -2,4 +2,7 @@
     <string name="app_name">FirstApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_resits_title">Пересдачи мои пересдачи</string>
+    <string name="all_resits_title">Все пересдачи</string>
+    <string name="profile_title">Мой профиль</string>
 </resources>
