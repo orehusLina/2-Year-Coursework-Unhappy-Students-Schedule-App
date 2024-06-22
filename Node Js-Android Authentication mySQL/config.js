@@ -111,6 +111,19 @@ app.delete('/delete', (req, res) => {
     });
 });
 
+app.get('/teacherPictures', (req, res) => {
+    const sql = 'SELECT * FROM TeacherPictures';
+    connection.query(sql, (err, result) => {
+        if (!err) {
+            res.status(200).json(result); // Отправка данных в формате JSON
+        } else {
+            res.status(500).send('Ошибка сервера');
+            console.error(err);
+        }
+    });
+});
+
+
 // Новый маршрут для получения данных о пересдачах
 app.get('/resits', (req, res) => {
     res.json(resits);

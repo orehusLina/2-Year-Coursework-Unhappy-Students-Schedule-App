@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        android:name="androidx.multidex.MultiDexApplication"
         <activity android:name=".FrontPageActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

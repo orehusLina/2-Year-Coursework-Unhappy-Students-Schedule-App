@@ -1,71 +1,108 @@
-<!-- res/layout/item_resit.xml -->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Название предмета -->
         <TextView
             android:id="@+id/textViewSubject"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:textAppearanceMedium"
             android:text="Subject"
+            android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@android:color/black"
-            android:layout_marginBottom="4dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewTeacherPhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_teacher"
+            app:civ_border_color="@android:color/darker_gray"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTeacher" />
+
+        <!-- Имя преподавателя -->
         <TextView
             android:id="@+id/textViewTeacher"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:textAppearanceSmall"
-            android:text="Teacher"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="4dp"/>
+            android:text="Teacher Name"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSubject" />
 
+        <!-- Группы -->
         <TextView
             android:id="@+id/textViewGroups"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:textAppearanceSmall"
             android:text="Groups"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="4dp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTeacher"
+            app:layout_constraintStart_toEndOf="@+id/imageViewTeacherPhoto"
+            app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Дата -->
         <TextView
             android:id="@+id/textViewDate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:textAppearanceSmall"
             android:text="Date"
+            android:layout_marginLeft="20dp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginBottom="4dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/textViewGroups"
+            app:layout_constraintStart_toEndOf="@+id/imageViewTeacherPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"/>
 
+        <!-- Время -->
         <TextView
             android:id="@+id/textViewTime"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:textAppearanceSmall"
             android:text="Time"
+            android:layout_marginLeft="20dp"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginBottom="4dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/textViewDate"
+            app:layout_constraintStart_toEndOf="@+id/imageViewTeacherPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"/>
 
+        <!-- Место -->
         <TextView
             android:id="@+id/textViewPlace"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:textAppearanceSmall"
             android:text="Place"
-            android:textColor="@android:color/darker_gray"/>
+            android:layout_marginLeft="20dp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTime"
+            app:layout_constraintStart_toEndOf="@+id/imageViewTeacherPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

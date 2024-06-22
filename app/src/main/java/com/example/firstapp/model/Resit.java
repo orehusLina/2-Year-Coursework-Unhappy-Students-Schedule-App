@@ -75,6 +75,15 @@ public class Resit {
         return builder.toString();
     }
 
+    public String getFirstTeacherName() {
+        if (teacherList != null && !teacherList.isEmpty()) {
+            Teacher firstTeacher = teacherList.get(0);
+            return firstTeacher.getLastName() + " " +
+                    firstTeacher.getFirstName() + " " +
+                    firstTeacher.getMiddleName();
+        }
+        return ""; // Возвращаем пустую строку, если список преподавателей пуст или null
+    }
 
     public String getCourse() {
         return course;

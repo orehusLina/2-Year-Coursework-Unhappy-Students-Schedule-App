@@ -1,6 +1,7 @@
 package com.example.firstapp.utils;
 
 import com.example.firstapp.model.ResitRequest;
+import com.example.firstapp.model.TeacherPicture;
 import com.example.firstapp.model.User;
 
 import java.util.List;
@@ -33,5 +34,9 @@ public interface UserAPI {
     @Headers("Content-Type: application/json")
     @DELETE("/api/delete")
     Call<Void> deleteUser(@Body User user);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/teacherPictures")
+    Call<List<TeacherPicture>> getTeacherPictures();
 
 }
