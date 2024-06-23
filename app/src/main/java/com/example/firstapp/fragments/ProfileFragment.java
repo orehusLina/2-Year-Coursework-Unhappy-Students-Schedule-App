@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.firstapp.R;
-import com.example.firstapp.UserViewModel;
+import com.example.firstapp.model.UserViewModel;
 import com.example.firstapp.model.User;
 
 public class ProfileFragment extends Fragment {

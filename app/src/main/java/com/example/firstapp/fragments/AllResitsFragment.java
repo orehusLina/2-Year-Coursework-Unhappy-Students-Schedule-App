@@ -8,22 +8,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstapp.R;
 import com.example.firstapp.ResitAdapter;
 import com.example.firstapp.model.Resit;
-import com.example.firstapp.model.Student;
-import com.example.firstapp.model.Teacher;
-import com.example.firstapp.utils.UserAPI;
 import com.example.firstapp.model.ResitRequest;
+import com.example.firstapp.model.ResitViewModel;
 import com.example.firstapp.utils.RetrofitClient;
+import com.example.firstapp.utils.UserAPI;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +32,7 @@ public class AllResitsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ResitAdapter resitAdapter;
+    private ResitViewModel resitViewModel;
 
     public AllResitsFragment() {
         // Required empty public constructor
@@ -47,6 +47,7 @@ public class AllResitsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        resitViewModel = new ViewModelProvider(requireActivity()).get(ResitViewModel.class);
         fetchResits();
 
         return view;
@@ -61,18 +62,43 @@ public class AllResitsFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     List<ResitRequest> resitRequests = response.body();
                     List<Resit> resits = Resit.convertToResits(resitRequests); // Преобразование в Resit
-                    resitAdapter = new ResitAdapter(resits);
-                    recyclerView.setAdapter(resitAdapter);
+                    setupRecyclerView(resits);
                 } else {
-                    // Handle the error
+                    // Обработка ошибки
                 }
             }
 
             @Override
             public void onFailure(Call<List<ResitRequest>> call, Throwable t) {
-                // Handle the error
+                // Обработка ошибки
             }
         });
     }
 
+    private void setupRecyclerView(List<Resit> resits) {
+        resitAdapter = new ResitAdapter(resits);
+        recyclerView.setAdapter(resitAdapter);
+
+        // Установка слушателя кликов на карточки пересдач
+        resitAdapter.setResitClickListener(new ResitAdapter.ResitClickListener() {
+            @Override
+            public void onResitClick(Resit resit) {
+                // Устанавливаем выбранную пересдачу в ViewModel
+                resitViewModel.selectResit(resit);
+
+                // Открываем фрагмент с деталями пересдачи
+                openResitDetailsFragment();
+            }
+        });
+    }
+
+    private void openResitDetailsFragment() {
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        ResitDetailsFragment fragment = new ResitDetailsFragment();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

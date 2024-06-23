@@ -25,11 +25,14 @@ import retrofit2.Response;
 public class ResitAdapter extends RecyclerView.Adapter<ResitAdapter.ResitViewHolder> {
 
     private List<Resit> resits;
-
+    private ResitClickListener listener;
     public ResitAdapter(List<Resit> resits) {
         this.resits = resits;
     }
 
+    public void setResitClickListener(ResitClickListener listener) {
+        this.listener = listener;
+    }
     @NonNull
     @Override
     public ResitViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,14 +53,14 @@ public class ResitAdapter extends RecyclerView.Adapter<ResitAdapter.ResitViewHol
         holder.textViewTime.setText(resit.getTime());
         holder.textViewPlace.setText(resit.getPlace());
         loadTeacherPhoto(firstTeacherFullName, holder.imageViewTeacherPhoto);
-        /*
-        String teacherPhotoUrl = "https://images.nplod.ru/gen_images_3/DiJTOE7GUpPVg18II7dvCpWHezy96w8j.jpg";
-        Glide.with(holder.itemView.getContext())
-                .load(teacherPhotoUrl)
-                .placeholder(R.drawable.ic_teacher) // optional placeholder
-                .error(R.drawable.ic_teacher) // optional error image
-                .into(holder.imageViewTeacherPhoto);
-         */
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onResitClick(resit);
+                }
+            }
+        });
     }
 
     private void loadTeacherPhoto(String teacherName, CircleImageView imageView) {
@@ -133,6 +136,9 @@ public class ResitAdapter extends RecyclerView.Adapter<ResitAdapter.ResitViewHol
         }
     }
 
+    public interface ResitClickListener {
+        void onResitClick(Resit resit);
+    }
     public void updateData(List<Resit> newResits) {
         resits.clear();
         resits.addAll(newResits);

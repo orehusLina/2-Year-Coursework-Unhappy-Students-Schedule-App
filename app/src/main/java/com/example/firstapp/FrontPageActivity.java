@@ -14,6 +14,7 @@ import com.example.firstapp.fragments.AllResitsFragment;
 import com.example.firstapp.fragments.MyResitsFragment;
 import com.example.firstapp.fragments.ProfileFragment;
 import com.example.firstapp.model.User;
+import com.example.firstapp.model.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FrontPageActivity extends AppCompatActivity {
