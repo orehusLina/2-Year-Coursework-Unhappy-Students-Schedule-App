@@ -7,5 +7,6 @@
     <color name="bottom_nav_icon_col">#8A8A8A</color> <!-- Цвет иконок для неактивных элементов -->
     <color name="bottom_nav_ripple_color">#FF4081</color> <!-- Цвет волны при нажатии -->
     <color name="bottom_nav_active_icon_color">#FF4081</color> <!-- Цвет активной иконки -->
+    <color name="almost_white">#f8f8f8</color>
 
 </resources>

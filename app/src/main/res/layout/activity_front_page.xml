@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:title="Пересдачи мои пересдачи"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -20,19 +19,41 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="44dp"
+        android:layout_below="@id/toolbar"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_below="@id/toolbar"/>
+        android:paddingTop="44dp" />
 
+    <!-- Floating Action Button for Filtering Resits -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:menu="@menu/bottom_navigation"
         app:backgroundTint="@color/light_gray"
         app:itemIconTint="@color/bottom_nav_icon_color"
+        app:itemRippleColor="@color/bottom_nav_ripple_color"
         app:itemTextColor="@color/bottom_nav_icon_color"
-        app:itemRippleColor="@color/bottom_nav_ripple_color"/>
+        app:menu="@menu/bottom_navigation" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_filter_resit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="92dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_filter"
+        app:backgroundTint="@color/almost_white" />
+
+    <!-- Floating Action Button for Adding Resit -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_resit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="168dp"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/almost_white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
