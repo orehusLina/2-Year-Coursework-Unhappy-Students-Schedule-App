@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewStudentPhoto"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_student"
+            app:civ_border_color="@android:color/darker_gray"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="16dp" />
+
+        <TextView
+            android:id="@+id/textViewStudentName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Student Name"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewStudentPhoto"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textViewStudentGroup"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/textViewStudentGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Student Group"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewStudentPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/textViewStudentName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textViewStudentSpeciality"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/textViewStudentSpeciality"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Student Speciality"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toEndOf="@+id/imageViewStudentPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/textViewStudentGroup"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

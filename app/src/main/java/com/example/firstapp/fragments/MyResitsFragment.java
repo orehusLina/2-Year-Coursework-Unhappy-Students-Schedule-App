@@ -100,6 +100,7 @@ public class MyResitsFragment extends Fragment {
 
         if ("Student".equals(role)) {
             for (Resit resit : resits) {
+                Log.e("AAAAAAAAAA", resit.toString());
                 for (Student student : resit.getStudentList()) {
                     if (student.matchesUser(user)) {
                         filteredResits.add(resit);

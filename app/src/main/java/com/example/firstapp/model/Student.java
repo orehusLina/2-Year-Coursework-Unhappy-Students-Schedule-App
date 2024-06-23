@@ -64,6 +64,15 @@ public class Student {
         return parts.length > 2 ? parts[2] : "";
     }
 
+    public String getFullName() {
+        StringBuilder fullName = new StringBuilder();
+        fullName.append(lastName).append(" ").append(firstName);
+        if (middleName != null && !middleName.isEmpty()) {
+            fullName.append(" ").append(middleName);
+        }
+        return fullName.toString();
+    }
+
     // Getters
     public String getLastName() {
         return lastName;

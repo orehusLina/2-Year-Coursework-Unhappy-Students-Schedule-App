@@ -6,17 +6,28 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.firstapp.R;
+import com.example.firstapp.StudentAdapter;
 import com.example.firstapp.model.Resit;
 import com.example.firstapp.model.ResitViewModel;
+import com.example.firstapp.model.Student;
+
+import java.util.List;
+
 public class ResitDetailsFragment extends Fragment {
 
     private ResitViewModel resitViewModel;
+    private RecyclerView recyclerViewStudents;
+    private StudentAdapter studentAdapter;
 
     public ResitDetailsFragment() {
         // Required empty public constructor
@@ -37,6 +48,10 @@ public class ResitDetailsFragment extends Fragment {
         TextView textViewTime = view.findViewById(R.id.textViewTime);
         TextView textViewPlace = view.findViewById(R.id.textViewPlace);
 
+        recyclerViewStudents = view.findViewById(R.id.recyclerViewStudents);
+        recyclerViewStudents.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewStudents.setHasFixedSize(true);
+
         resitViewModel.getSelectedResit().observe(getViewLifecycleOwner(), new Observer<Resit>() {
             @Override
             public void onChanged(Resit resit) {
@@ -47,6 +62,11 @@ public class ResitDetailsFragment extends Fragment {
                     textViewDate.setText(resit.getDate());
                     textViewTime.setText(resit.getTime());
                     textViewPlace.setText(resit.getPlace());
+
+                    List<Student> students = resit.getStudentList();
+                    Log.e("AAAAAAAAAA", students.toString());
+                    studentAdapter = new StudentAdapter(students);
+                    recyclerViewStudents.setAdapter(studentAdapter);
                 }
             }
         });

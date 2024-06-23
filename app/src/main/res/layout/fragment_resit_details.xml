@@ -1,56 +1,132 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="wrap_content"
 
-    <!-- Название предмета -->
-    <TextView
-        android:id="@+id/textViewSubject"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        android:paddingTop="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="60dp"
+        >
 
-    <!-- Имя преподавателя -->
-    <TextView
-        android:id="@+id/textViewTeacher"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="@android:color/darker_gray" />
+        <!-- Название предмета -->
+        <TextView
+            android:id="@+id/textViewSubject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Subject"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Группы -->
-    <TextView
-        android:id="@+id/textViewGroups"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="@android:color/darker_gray" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewTeacherPhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_teacher"
+            app:civ_border_color="@android:color/darker_gray"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTeacher" />
 
-    <!-- Дата -->
-    <TextView
-        android:id="@+id/textViewDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="@android:color/darker_gray" />
+        <!-- Имя преподавателя -->
+        <TextView
+            android:id="@+id/textViewTeacher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Teacher Name"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSubject" />
 
-    <!-- Время -->
-    <TextView
-        android:id="@+id/textViewTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="@android:color/darker_gray" />
+        <!-- Группы -->
+        <TextView
+            android:id="@+id/textViewGroups"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:text="Groups"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTeacher"
+            app:layout_constraintStart_toEndOf="@+id/imageViewTeacherPhoto"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Место -->
-    <TextView
-        android:id="@+id/textViewPlace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="@android:color/darker_gray" />
+        <!-- Дата -->
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:text="Date"
+            android:layout_marginLeft="20dp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/textViewGroups"
+            app:layout_constraintStart_toEndOf="@+id/imageViewTeacherPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Время -->
+        <TextView
+            android:id="@+id/textViewTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:text="Time"
+            android:layout_marginLeft="20dp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDate"
+            app:layout_constraintStart_toEndOf="@+id/imageViewTeacherPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Место -->
+        <TextView
+            android:id="@+id/textViewPlace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:text="Place"
+            android:layout_marginLeft="20dp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTime"
+            app:layout_constraintStart_toEndOf="@+id/imageViewTeacherPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Заголовок списка студентов -->
+        <TextView
+            android:id="@+id/textViewStudentListHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/imageViewTeacherPhoto"
+            android:text="Список студентов"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
+        <!-- RecyclerView для списка студентов -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewStudents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewStudentListHeader"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:scrollbars="vertical" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
